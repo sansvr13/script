@@ -1,0 +1,916 @@
+local Library = loadstring(game:HttpGet("https://raw.githubusercontent.com/xHeptc/Kavo-UI-Library/main/source.lua"))()
+local Main = Library.CreateLib("PHOENIX HUB v1 By MyNameIsNamePC on roblox", "Ocean")
+--main
+
+local Main = Main:NewTab("All scripts")
+local MainSection = Main:NewSection("universal scripts")
+
+MainSection:NewToggle("SUPER SPEED", "makes you go fast", function(state)
+    if state then
+        game.Players.LocalPlayer.Character.Humanoid.WalkSpeed = 100
+    else
+        game.Players.LocalPlayer.Character.Humanoid.WalkSpeed = 16
+    end
+end)
+
+MainSection:NewToggle("SUPER Jump", "makes your Jump Height 100", function(state)
+    if state then
+        game.Players.LocalPlayer.Character.Humanoid.JumpHeight = 100
+    else
+        game.Players.LocalPlayer.Character.Humanoid.JumpHeight = 16
+    end
+end)
+
+MainSection:NewButton("backdoor.exe script", "backdoor script", function()
+    loadstring(game:HttpGet(('https://raw.githubusercontent.com/iK4oS/backdoor.exe/master/source.lua'),true))()
+end)
+
+MainSection:NewButton("GOD", "you cant be killed", function()
+    loadstring(game:HttpGet("https://pastebin.com/raw/FwfNEqYz", true))()
+end)
+
+MainSection:NewButton("Invisible Tool", "a Invisible Tool", function()
+   local offset = 1100
+local invisible = game.Players.LocalPlayer
+local grips = {}
+local heldTool
+local gripChanged
+local handle
+local weld
+function setDisplayDistance(distance)
+    for _, player in pairs(game.Players:GetPlayers()) do
+        if player.Character and player.Character:FindFirstChildWhichIsA("Humanoid") then
+            player.Character:FindFirstChildWhichIsA("Humanoid").NameDisplayDistance = distance
+            player.Character:FindFirstChildWhichIsA("Humanoid").HealthDisplayDistance = distance
+        end
+    end
+end
+local tool = Instance.new("Tool", game.Players.LocalPlayer.Backpack)
+tool.Name = "Invisible"
+tool.RequiresHandle = false
+tool.CanBeDropped = false
+tool.Equipped:Connect(
+    function()
+        wait()
+        if not invisible then
+            invisible = true
+            tool.Name = "Enabled Invisible"
+            if handle then
+                handle:Destroy()
+            end
+            if weld then
+                weld:Destroy()
+            end
+            handle = Instance.new("Part", workspace)
+            handle.Name = "Handle"
+            handle.Transparency = 1
+            handle.CanCollide = false
+            handle.Size = Vector3.new(2, 1, 1)
+            weld = Instance.new("Weld", handle)
+            weld.Part0 = handle
+            weld.Part1 = game.Players.LocalPlayer.Character.HumanoidRootPart
+            weld.C0 = CFrame.new(0, offset - 1.5, 0)
+            setDisplayDistance(offset + 100)
+            workspace.CurrentCamera.CameraSubject = handle
+            game.Players.LocalPlayer.Character.HumanoidRootPart.CFrame = game.Players.LocalPlayer.Character.HumanoidRootPart.CFrame * CFrame.new(0, offset, 0)
+            game.Players.LocalPlayer.Character.Humanoid.HipHeight = offset
+            game.Players.LocalPlayer.Character.Humanoid:ChangeState(11)
+            for _, child in pairs(game.Players.LocalPlayer.Backpack:GetChildren()) do
+                if child:IsA("Tool") and child ~= tool then
+                    grips[child] = child.Grip
+                end
+            end
+        elseif invisible then
+            invisible = false
+            tool.Name = "Disabled Invisible"
+            if handle then
+                handle:Destroy()
+            end
+            if weld then
+                weld:Destroy()
+            end
+            for _, child in pairs(game.Players.LocalPlayer.Character:GetChildren()) do
+                if child:IsA("Tool") then
+                    child.Parent = game.Players.LocalPlayer.Backpack
+                end
+            end
+            for tool, grip in pairs(grips) do
+                if tool then
+                    tool.Grip = grip
+                end
+            end
+            heldTool = nil
+            setDisplayDistance(100)
+            workspace.CurrentCamera.CameraSubject = game.Players.LocalPlayer.Character.Humanoid
+            game.Players.LocalPlayer.Character.HumanoidRootPart.CFrame = game.Players.LocalPlayer.Character.HumanoidRootPart.CFrame * CFrame.new(0, -offset, 0)
+            game.Players.LocalPlayer.Character.Humanoid.HipHeight = 0
+        end
+        tool.Parent = game.Players.LocalPlayer.Backpack
+    end
+)
+game.Players.LocalPlayer.Character.ChildAdded:Connect(
+    function(child)
+        wait()
+        if invisible and child:IsA("Tool") and child ~= heldTool and child ~= tool then
+            heldTool = child
+            local lastGrip = heldTool.Grip
+            if not grips[heldTool] then
+                grips[heldTool] = lastGrip
+            end
+            for _, track in pairs(game.Players.LocalPlayer.Character.Humanoid:GetPlayingAnimationTracks()) do
+                track:Stop()
+            end
+            game.Players.LocalPlayer.Character.Animate.Disabled = true
+            heldTool.Grip = heldTool.Grip * (CFrame.new(0, offset - 1.5, 1.5) * CFrame.Angles(math.rad(-90), 0, 0))
+            heldTool.Parent = game.Players.LocalPlayer.Backpack
+            heldTool.Parent = game.Players.LocalPlayer.Character
+            if gripChanged then
+                gripChanged:Disconnect()
+            end
+            gripChanged =
+                heldTool:GetPropertyChangedSignal("Grip"):Connect(
+                function()
+                    wait()
+                    if not invisible then
+                        gripChanged:Disconnect()
+                    end
+                    if heldTool.Grip ~= lastGrip then
+                        lastGrip =
+                            heldTool.Grip * (CFrame.new(0, offset - 1.5, 1.5) * CFrame.Angles(math.rad(-90), 0, 0))
+                        heldTool.Grip = lastGrip
+                        heldTool.Parent = game.Players.LocalPlayer.Backpack
+                        heldTool.Parent = game.Players.LocalPlayer.Character
+                    end
+                end
+            )
+        end
+    end
+)
+end)
+
+MainSection:NewButton("hat pet", "your hats are pets made by 1+1=2", function()
+
+local randomstr = tostring(math.random(100000000,999999999))
+
+local randomize = Instance.new("ScreenGui")
+local randomize_2 = Instance.new("Frame")
+local randomize_3 = Instance.new("TextLabel")
+local randomize_4 = Instance.new("TextLabel")
+local randomize_5 = Instance.new("TextLabel")
+local randomize_6 = Instance.new("TextButton")
+
+
+randomize.Name = randomstr
+randomize.Parent = game.Players.LocalPlayer:WaitForChild("PlayerGui")
+randomize.ZIndexBehavior = Enum.ZIndexBehavior.Sibling
+
+randomize_2.Name = randomstr
+randomize_2.Parent = randomize
+randomize_2.BackgroundColor3 = Color3.fromRGB(83, 83, 83)
+randomize_2.BorderColor3 = Color3.fromRGB(0, 0, 0)
+randomize_2.BorderSizePixel = 10
+randomize_2.Position = UDim2.new(0.41513592, 0, 0.377777755, 0)
+randomize_2.Size = UDim2.new(0, 230, 0, 197)
+
+randomize_3.Name = randomstr
+randomize_3.Parent = randomize_2
+randomize_3.Active = false
+randomize_3.BackgroundColor3 = Color3.fromRGB(255, 255, 255)
+randomize_3.BackgroundTransparency = 1.000
+randomize_3.Position = UDim2.new(0.0652173907, 0, 0.0913705602, 0)
+randomize_3.Size = UDim2.new(0, 208, 0, 88)
+randomize_3.Font = Enum.Font.SourceSans
+randomize_3.Text = "Made by:"
+randomize_3.TextColor3 = Color3.fromRGB(0, 0, 0)
+randomize_3.TextSize = 33.000
+randomize_3.TextWrapped = true
+
+randomize_4.Name = randomstr
+randomize_4.Parent = randomize_2
+randomize_4.Active = false
+randomize_4.BackgroundColor3 = Color3.fromRGB(255, 255, 255)
+randomize_4.BackgroundTransparency = 1.000
+randomize_4.Position = UDim2.new(0.0652173907, 0, 0.370558381, 0)
+randomize_4.Size = UDim2.new(0, 206, 0, 48)
+randomize_4.Font = Enum.Font.SourceSans
+randomize_4.Text = "(1+1=2 on roblox)"
+randomize_4.TextColor3 = Color3.fromRGB(0, 0, 0)
+randomize_4.TextSize = 33.000
+randomize_4.TextWrapped = true
+
+randomize_5.Name = randomstr
+randomize_5.Parent = randomize_2
+randomize_5.Active = false
+randomize_5.BackgroundColor3 = Color3.fromRGB(255, 255, 255)
+randomize_5.BackgroundTransparency = 1.000
+randomize_5.Position = UDim2.new(0.0652173907, 0, 0.558375657, 0)
+randomize_5.Size = UDim2.new(0, 205, 0, 46)
+randomize_5.Font = Enum.Font.SourceSans
+randomize_5.Text = "(rouxhaver on github)"
+randomize_5.TextColor3 = Color3.fromRGB(0, 0, 0)
+randomize_5.TextScaled = true
+randomize_5.TextSize = 33.000
+randomize_5.TextWrapped = true
+
+randomize_6.Name = randomstr.."2"
+randomize_6.Parent = randomize_2
+randomize_6.BackgroundColor3 = Color3.fromRGB(255, 0, 0)
+randomize_6.BorderColor3 = Color3.fromRGB(170, 0, 0)
+randomize_6.BorderSizePixel = 3
+randomize_6.Position = UDim2.new(0.845000029, 0, 0.0149999997, 0)
+randomize_6.Size = UDim2.new(0, 33, 0, 33)
+randomize_6.Font = Enum.Font.SourceSans
+randomize_6.Text = "X"
+randomize_6.TextColor3 = Color3.fromRGB(255, 255, 255)
+randomize_6.TextScaled = true
+randomize_6.TextSize = 14.000
+randomize_6.TextWrapped = true
+
+local frame = Game.Players.LocalPlayer.PlayerGui[randomstr]
+local close = frame[randomstr][randomstr.."2"]
+
+close.MouseButton1Click:connect(function()
+	frame.Enabled = false
+end)
+
+local ScreenGui = Instance.new("ScreenGui")
+local Start = Instance.new("TextButton")
+
+
+Start.Name = "Start"
+Start.Parent = ScreenGui
+Start.BackgroundColor3 = Color3.fromRGB(0, 220, 92)
+Start.BorderColor3 = Color3.fromRGB(53, 53, 53)
+Start.BorderSizePixel = 10
+Start.Position = UDim2.new(0.418730646, 0, 0.760493815, 0)
+Start.Size = UDim2.new(0.162538692, 0, 0.114814818, 0)
+Start.Font = Enum.Font.SourceSans
+Start.Text = "Start"
+Start.TextColor3 = Color3.fromRGB(0, 0, 0)
+Start.TextScaled = true
+Start.TextSize = 14.000
+Start.TextWrapped = true
+
+ScreenGui.Parent = game.Players.LocalPlayer:WaitForChild("PlayerGui")
+ScreenGui.ZIndexBehavior = Enum.ZIndexBehavior.Sibling
+
+player = game.Players.LocalPlayer
+
+selectedhats = {}
+
+ICantDoMathsCount = 0
+ytime = 1
+weirdcounter = 1
+
+for i,v in pairs(player.Character:GetDescendants()) do
+	if v:IsA("Accessory") then
+
+		local opt = Instance.new("Frame")
+		local view = Instance.new("ViewportFrame")
+		local Select = Instance.new("TextButton")
+		local cam = Instance.new("Camera")
+
+		weirdcounter = weirdcounter + 1
+
+		if weirdcounter == 7 then
+			ytime = 2
+			ICantDoMathsCount = 0
+		end
+
+		opt.Name = "opt"
+		opt.Parent = ScreenGui
+		opt.BackgroundColor3 = Color3.fromRGB(169, 196, 255)
+		opt.BorderColor3 = Color3.fromRGB(53, 53, 53)
+		opt.BorderSizePixel = 11
+		opt.Position = UDim2.new(0.08 + ICantDoMathsCount, 0, 0.249382704 * ytime, 0)
+		opt.Size = UDim2.new(0.112229101, 0, 0.213580251, 0)
+
+		ICantDoMathsCount = ICantDoMathsCount + 0.15
+
+		view.Name = "view"
+		view.Parent = opt
+		view.BackgroundColor3 = Color3.fromRGB(255, 255, 255)
+		view.BackgroundTransparency = 1
+		view.BorderSizePixel = 0
+		view.Size = UDim2.new(1.00000024, 0, 0.729156077, 0)
+
+		Select.Name = "Select"
+		Select.Parent = opt
+		Select.BackgroundColor3 = Color3.fromRGB(0, 220, 92)
+		Select.BorderColor3 = Color3.fromRGB(75, 75, 75)
+		Select.BorderSizePixel = 5
+		Select.Position = UDim2.new(0.068965517, 0, 0.774566472, 0)
+		Select.Size = UDim2.new(0.865517259, 0, 0.186705261, 0)
+		Select.Font = Enum.Font.SourceSans
+		Select.Text = "Select"
+		Select.TextColor3 = Color3.fromRGB(0, 0, 0)
+		Select.TextScaled = true
+		Select.TextSize = 14.000
+		Select.TextWrapped = true
+
+		cam.Parent = opt
+		cam.CFrame = CFrame.new(0,0,2.5)
+		view.CurrentCamera = cam
+		model = Instance.new("Model",view)
+
+		local hat = v.Handle:Clone()
+		hat.Parent = model
+		hat.Anchored = true
+		hat.Position = Vector3.new(0,0,0)
+
+		coroutine.wrap(function()
+			while hat ~= nil do
+				wait()
+				hat.Orientation = hat.Orientation + Vector3.new(0,1.5,0)
+			end
+		end)()
+
+		Select.Activated:Connect(function()
+			Select.BackgroundColor3 = Color3.fromRGB(200, 0, 0)
+			Select.Text = "Selected"
+			Select.Active = false
+			table.insert(selectedhats,v.Name)
+		end)
+	end
+end
+
+
+Start.MouseButton1Up:Connect(function()
+	ScreenGui:Destroy()
+
+	folder = Instance.new("Folder",workspace)
+
+	for i,v in pairs(selectedhats) do
+
+		local vispet = player.Character[v].Handle
+
+		local pet = Instance.new("Part",folder)
+		pet.Name = "pet"
+		pet.Size = Vector3.new(1,1,1)
+		pet.Transparency = 1
+		pet.Position = player.Character.HumanoidRootPart.Position
+		pet.Anchored = true
+		pet.CanCollide = false
+
+		vispet.AccessoryWeld:Destroy()
+
+
+		local replicate = Instance.new("RopeConstraint",player.Character.Torso)
+		replicate.Attachment0 = Instance.new("Attachment",player.Character.Torso)
+		replicate.Attachment1 = Instance.new("Attachment",vispet)
+		replicate.Length = math.huge
+
+
+		local function customtwn(input, offset)
+			local input = input or error("input is nil");
+			local offset = offset or CFrame.new(0,0,0);
+			local vec3, cframe;
+
+			if typeof(input) == "table" then
+				vec3 = Vector3.new(unpack(input)); cframe = CFrame.new(unpack(input));
+			elseif typeof(input) ~= "Instance" then
+				return error("wrong format used");
+			end;
+
+			local Time = 0.5
+			local twn = game.TweenService:Create(pet, TweenInfo.new(Time,Enum.EasingStyle.Quad), {CFrame = (cframe or input.CFrame) * offset});
+			twn:Play();
+		end;
+
+		local change = 0.01
+		local high = 0
+		local clock = 0
+		local offX = math.random(-3,3)
+		local offY = math.random(-2,3)
+		local offZ = math.random(-3,3)
+		local clkrst = math.random(100,300)
+
+		coroutine.wrap(function()
+			while task.wait() do
+				vispet.CFrame = pet.CFrame
+
+			end
+		end)()
+
+		coroutine.wrap(function()
+			while wait(0.01) do
+				clock = clock + 1
+				if clock == clkrst then
+					offX = math.random(-3,3)
+					offY = math.random(-2,3)
+					offZ = math.random(-3,3)
+					clock = 0
+					clkrst = math.random(100,300)
+				end
+
+				high = high + change
+
+				if high > 0.5 then
+					change = -0.02
+				end
+
+				if high < -0.5 then
+					change = 0.02
+				end
+				customtwn(player.Character.HumanoidRootPart, CFrame.new(offX,offY + high,offZ))
+			end
+		end)()
+	end
+	while wait(0.1) do
+		if player.Character.Humanoid.Health == 0 then
+			folder:Destroy()
+			script:Destroy()
+		end
+	end
+end)
+end)
+
+MainSection:NewButton("Infinite Yield", "it is Infinite Yield", function()
+    loadstring(game:HttpGet('https://raw.githubusercontent.com/EdgeIY/infiniteyield/master/source'))()
+end)
+
+MainSection:NewButton("Chat Spy", "SEE PRIVATE MESSAGE", function()
+    local OrionLib = loadstring(game:HttpGet(('https://raw.githubusercontent.com/shlexware/Orion/main/source')))()
+local Window = OrionLib:MakeWindow({Name = "Anir Hub", HidePremium = false, SaveConfig = true, ConfigFolder = "OrionTest"})
+
+local Tab = Window:MakeTab({
+    Name = "Main",
+    Icon = "rbxassetid://4483345998",
+    PremiumOnly = false
+})
+
+local Section = Tab:AddSection({
+    Name = "Chat Log's"
+})
+
+--[[
+Name = <string> - The name of the section.
+]]
+OrionLib:MakeNotification({
+    Name = "From Anir",
+    Content = "U better ont leak it!",
+    Image = "rbxassetid://4483345998",
+    Time = 5
+})
+
+--[[
+Title = <string> - The title of the notification.
+Content = <string> - The content of the notification.
+Image = <string> - The icon of the notification.
+Time = <number> - The duration of the notfication.
+]]
+--This script reveals ALL hidden messages in the default chat
+--chat "/spy" to toggle!
+enabled = true
+--if true will check your messages too
+spyOnMyself = true
+--if true will chat the logs publicly (fun, risky)
+public = false
+--if true will use /me to stand out
+publicItalics = true
+--customize private logs
+privateProperties = {
+    Color = Color3.fromRGB(0,255,255); 
+    Font = Enum.Font.SourceSansBold;
+    TextSize = 18;
+}
+local StarterGui = game:GetService("StarterGui")
+local Players = game:GetService("Players")
+local player = Players.LocalPlayer
+local saymsg = game:GetService("ReplicatedStorage"):WaitForChild("DefaultChatSystemChatEvents"):WaitForChild("SayMessageRequest")
+local getmsg = game:GetService("ReplicatedStorage"):WaitForChild("DefaultChatSystemChatEvents"):WaitForChild("OnMessageDoneFiltering")
+local instance = (_G.chatSpyInstance or 0) + 1
+_G.chatSpyInstance = instance
+ 
+local function onChatted(p,msg)
+    if _G.chatSpyInstance == instance then
+        if p==player and msg:lower():sub(1,4)=="/spy" then
+            enabled = not enabled
+            wait(0.3)
+            privateProperties.Text = "{SPY "..(enabled and "EN" or "DIS").."ABLED}"
+            StarterGui:SetCore("ChatMakeSystemMessage",privateProperties)
+        elseif enabled and (spyOnMyself==true or p~=player) then
+            msg = msg:gsub("[\n\r]",''):gsub("\t",' '):gsub("[ ]+",' ')
+            local hidden = true
+            local conn = getmsg.OnClientEvent:Connect(function(packet,channel)
+                if packet.SpeakerUserId==p.UserId and packet.Message==msg:sub(#msg-#packet.Message+1) and (channel=="All" or (channel=="Team" and public==false and Players[packet.FromSpeaker].Team==player.Team)) then
+                    hidden = false
+                end
+            end)
+            wait(1)
+            conn:Disconnect()
+            if hidden and enabled then
+                if public then
+                    saymsg:FireServer((publicItalics and "/me " or '').."{SPY} [".. p.Name .."]: "..msg,"All")
+                else
+                    privateProperties.Text = "{SPY} [".. p.Name .."]: "..msg
+                    StarterGui:SetCore("ChatMakeSystemMessage",privateProperties)
+                end
+            end
+        end
+    end
+end
+ 
+for _,p in ipairs(Players:GetPlayers()) do
+    p.Chatted:Connect(function(msg) onChatted(p,msg) end)
+end
+Players.PlayerAdded:Connect(function(p)
+    p.Chatted:Connect(function(msg) onChatted(p,msg) end)
+end)
+privateProperties.Text = "{SPY "..(enabled and "EN" or "DIS").."ABLED}"
+StarterGui:SetCore("ChatMakeSystemMessage",privateProperties)
+local chatFrame = player.PlayerGui.Chat.Frame
+chatFrame.ChatChannelParentFrame.Visible = true
+chatFrame.ChatBarParentFrame.Position = chatFrame.ChatChannelParentFrame.Position+UDim2.new(UDim.new(),chatFrame.ChatChannelParentFrame.Size.Y)
+end)
+
+MainSection:NewButton("Radar", "Universal Radar Script CREDITS TO TOPIT FOR MAKING", function()
+    _G.RadarSettings = {
+    --- Radar settings
+    RADAR_LINES = true; -- Displays distance rings + cardinal lines 
+    RADAR_LINE_DISTANCE = 50; -- The distance between each distance ring
+    RADAR_SCALE = 1; -- Controls how "zoomed in" the radar display is 
+    RADAR_RADIUS = 125; -- The size of the radar itself
+    RADAR_ROTATION = true; -- Toggles radar rotation. Looks kinda trippy when disabled
+    SMOOTH_ROT = true; -- Toggles smooth radar rotation
+    SMOOTH_ROT_AMNT = 30; -- Lower number is smoother, higher number is snappier 
+    CARDINAL_DISPLAY = true; -- Displays the four cardinal directions (north east south west) around the radar
+    
+    --- Marker settings
+    DISPLAY_OFFSCREEN = true; -- Displays offscreen / off-radar markers
+    DISPLAY_TEAMMATES = true; -- Displays markers that belong to your teammates
+    DISPLAY_TEAM_COLORS = true; -- Displays your teammates markers with either a custom color (change Team_Marker) or with that teams TeamColor (enable USE_TEAM_COLORS) 
+    DISPLAY_FRIEND_COLORS = true; -- Displays your friends markers with a custom color (Friend_Marker). This takes priority over DISPLAY_TEAM_COLORS and DISPLAY_RGB
+    DISPLAY_RGB_COLORS = false; -- Displays each marker with an RGB cycle. Takes priority over DISPLAY_TEAM_COLORS, but not DISPLAY_FRIEND_COLORS
+    MARKER_SCALE_BASE = 1.25; -- Base scale that gets applied to markers
+    MARKER_SCALE_MAX = 1.25; -- The largest scale that a marker can be
+    MARKER_SCALE_MIN = 0.75; -- The smallest scale that a marker can be
+    MARKER_FALLOFF = true; -- Affects the markers' scale depending on how far away the player is - bypasses SCALE_MIN and SCALE_MAX
+    MARKER_FALLOFF_AMNT = 125; -- How close someone has to be for falloff to start affecting them 
+    OFFSCREEN_TRANSPARENCY = 0.3; -- Transparency of offscreen markers
+    USE_FALLBACK = false; -- Enables an emergency "fallback mode" for StreamingEnabled games
+    USE_QUADS = true; -- Displays radar markers as arrows instead of dots 
+    USE_TEAM_COLORS = false; -- Uses a team's TeamColor for marker colors
+    VISIBLITY_CHECK = false; -- Makes markers that are not visible slightly transparent 
+    
+    --- Theme
+    RADAR_THEME = {
+        Outline = Color3.fromRGB(35, 35, 45); -- Radar outline
+        Background = Color3.fromRGB(25, 25, 35); -- Radar background
+        DragHandle = Color3.fromRGB(50, 50, 255); -- Drag handle 
+        
+        Cardinal_Lines = Color3.fromRGB(110, 110, 120); -- Color of the horizontal and vertical lines
+        Distance_Lines = Color3.fromRGB(65, 65, 75); -- Color of the distance rings
+        
+        Generic_Marker = Color3.fromRGB(255, 25, 115); -- Color of a player marker without a team
+        Local_Marker = Color3.fromRGB(115, 25, 255); -- Color of your marker, regardless of team
+        Team_Marker = Color3.fromRGB(25, 115, 255); -- Color of your teammates markers. Used when DISPLAY_TEAM_COLORS is disabled
+        Friend_Marker = Color3.fromRGB(25, 255, 115); -- Color of your friends markers. Used when DISPLAY_FRIEND_COLORS is enabled 
+    };
+}
+
+loadstring(game:HttpGet('https://raw.githubusercontent.com/topitbopit/stuff/main/PlayerRadar/source.lua'))()
+end)
+
+MainSection:NewButton("Custom Volume Slider", "Custom Volume Slider", function()
+    if not game:IsLoaded() then game.Loaded:Wait() end
+
+local plr = game.Players.LocalPlayer
+local m = plr:GetMouse()
+local us = game:GetService("UserInputService")
+
+local function fiximage(id)
+   return string.format("rbxthumb://type=Asset&id=%s&w=420&h=420",tonumber(id))
+end
+
+local rblxgui = game.CoreGui:WaitForChild("RobloxGui")
+local shield = rblxgui:WaitForChild("SettingsShield"):WaitForChild("SettingsShield")
+local pageview = shield:WaitForChild("MenuContainer"):WaitForChild("PageViewClipper"):WaitForChild("PageView"):WaitForChild("PageViewInnerFrame")
+local volsound = rblxgui:WaitForChild("Sounds"):WaitForChild("VolumeChangeSound")
+
+local settings = pageview:FindFirstChild("Page")
+
+if not settings then
+   local addedcon
+   addedcon = pageview.ChildAdded:Connect(function(page)
+       if page.Name == "Page" then
+           settings = page
+           addedcon:Disconnect()
+       end
+   end)
+   
+   repeat task.wait() until settings
+end
+
+local volume = settings:WaitForChild("VolumeFrame")
+volume:WaitForChild("Slider"):Destroy()
+
+local slider = Instance.new("Frame")
+slider.AnchorPoint = Vector2.new(1,0.5)
+slider.BackgroundTransparency = 1
+slider.Position = UDim2.new(1,0,0.5,0)
+slider.Size = UDim2.new(0.6,0,1,0)
+slider.Name = "Slider"
+
+local bar = Instance.new("ImageLabel",slider)
+bar.AnchorPoint = Vector2.new(0.5,0.5)
+bar.BackgroundTransparency = 1
+bar.Position = UDim2.new(0.5,0,0.5,0)
+bar.Size = UDim2.new(0.95,0,0.7,0)
+bar.ImageColor3 = Color3.fromRGB(78,84,96)
+bar.Image = fiximage(6755657364)
+bar.ScaleType = Enum.ScaleType.Slice
+bar.SliceCenter = Rect.new(210,210,210,210)
+
+local fill = bar:Clone()
+fill.AnchorPoint = Vector2.new(0,0)
+fill.ImageColor3 = Color3.fromRGB(0,162,255)
+fill.Position = UDim2.new(0,0,0,0)
+fill.Size = UDim2.new(1,0,1,0)
+fill.Parent = bar
+
+local gradient = Instance.new("UIGradient",fill)
+gradient.Color = ColorSequence.new(Color3.fromRGB(135,200,200))
+gradient.Transparency = NumberSequence.new({
+   NumberSequenceKeypoint.new(0,0),
+   NumberSequenceKeypoint.new(0.9999,0),
+   NumberSequenceKeypoint.new(1,1)
+})
+
+local button = Instance.new("TextButton",slider)
+button.ZIndex = 10
+button.BackgroundTransparency = 1
+button.Size = UDim2.new(1,0,1,0)
+button.Font = Enum.Font.SourceSans
+button.TextColor3 = Color3.fromRGB(255,255,255)
+button.TextSize = 26
+
+local uset = UserSettings():GetService("UserGameSettings")
+local roundamount = 5
+
+local oldval = uset.MasterVolume
+function update(percent)
+   local trueround = roundamount/100
+   local p = math.round(percent/trueround)*trueround
+   
+   gradient.Offset = Vector2.new(p-1,0)
+   uset.MasterVolume = p
+   button.Text = math.round(p*100) .."%"
+   
+   local diff = uset.MasterVolume - oldval
+   
+   if diff ~= 0 then
+       volsound:Play()
+   end
+   oldval = uset.MasterVolume
+end
+
+function setslider()
+   local abpos = bar.AbsolutePosition.X
+   local absize = bar.AbsoluteSize.X
+   local x = m.X
+   
+   local p = math.clamp((x-abpos)/(absize),0,1)
+   update(p)
+end
+update(uset.MasterVolume)
+
+local holding = false
+button.MouseButton1Down:Connect(function()
+   setslider()
+   holding = true
+end)
+
+us.InputEnded:Connect(function(key,pro)
+   if key.UserInputType == Enum.UserInputType.MouseButton1 then
+       holding = false
+   end
+end)
+
+volsound.Volume = 1
+
+m.Move:Connect(function()
+   if holding then
+       setslider()
+   end
+end)
+
+slider.Parent = volume
+end)
+
+MainSection:NewButton("noclip", "makes you noclip", function()
+    local Noclip = nil
+local Clip = nil
+
+function noclip()
+	Clip = false
+	local function Nocl()
+		if Clip == false and game.Players.LocalPlayer.Character ~= nil then
+			for _,v in pairs(game.Players.LocalPlayer.Character:GetDescendants()) do
+				if v:IsA('BasePart') and v.CanCollide and v.Name ~= floatName then
+					v.CanCollide = false
+				end
+			end
+		end
+		wait(0.21) -- basic optimization
+	end
+	Noclip = game:GetService('RunService').Stepped:Connect(Nocl)
+end
+
+function clip()
+	if Noclip then Noclip:Disconnect() end
+	Clip = true
+end
+
+noclip() -- to toggle noclip() and clip()
+end)
+
+local MainSection = Main:NewSection("Rate My Avatar scripts")
+
+MainSection:NewButton("Trivia", "Trivia Script - RATE MY AVATAR", function()
+    
+local trivia = {
+    ["What is the capital of France?"] = "Paris",
+    ["What is the largest continent in the world?"] = "Asia",
+    ["Who wrote the Harry Potter series of books?"] = "J.K. Rowling",
+    ["What is the currency of Japan?"] = "Yen",
+    ["What is the smallest planet in our solar system?"] = "Mercury",
+    ["Who was the first president of the United States?"] = "George Washington",
+    ["What is the name of the world's largest ocean?"] = "Pacific Ocean",
+    ["What is the chemical symbol for gold?"] = "Au",
+    ["What is the highest mountain in the world?"] = "Mount Everest",
+    ["What is the largest country in the world by land area?"] = "Russia",
+    ["Which country gifted the Statue of Liberty to the United States?"] = "France",
+    ["What is the name of the river that flows through Egypt?"] = "Nile",
+    ["Who was the lead singer of the band Queen?"] = "Freddie Mercury",
+    ["What is the currency of Brazil?"] = "Real",
+    ["What is the chemical symbol for oxygen?"] = "O",
+    ["What is the capital of Spain?"] = "Madrid",
+    ["What is the smallest country in the world by land area?"] = "Vatican City",
+    ["Which country is famous for inventing pizza?"] = "Italy",
+    ["What is the name of the world's tallest animal?"] = "Giraffe",
+    ["What is the currency of the United Kingdom?"] = "Pound sterling",
+    ["What is the chemical symbol for carbon?"] = "C",
+    ["Who won the FIFA Women's World Cup in 2019?"] = "United States",
+    ["What is the capital of Australia?"] = "Canberra",
+    ["Who wrote the book '1984'?"] = "George Orwell",
+    ["What is the name of the currency used in China?"] = "Yuan",
+    ["What is the largest mammal in the world?"] = "Blue whale",
+    ["What is the chemical symbol for sodium?"] = "Na",
+    ["Which planet in our solar system has the most moons?"] = "Jupiter",
+    ["What is the name of the world's largest desert?"] = "Sahara",
+    ["What is the name of the first satellite launched into space?"] = "Sputnik",
+    ["What is the smallest country in the world by population?"] = "Vatican City",
+    ["Who wrote the famous novel 'Pride and Prejudice'?"] = "Jane Austen",
+    ["What is the name of the currency used in India?"] = "Rupee",
+    ["What is the name of the world's largest land animal?"] = "Elephant",
+    ["What is the chemical symbol for iron?"] = "Fe",
+    ["Which planet in our solar system is the hottest?"] = "Venus",
+    ["What is the name of the world's largest waterfall?"] = "Victoria Falls",
+    ["What is the name of the first man to walk on the moon?"] = "Neil Armstrong",
+}
+
+
+
+
+
+local Rayfield = loadstring(game:HttpGet('https://raw.githubusercontent.com/shlexware/Rayfield/main/source'))()
+
+local Window = Rayfield:CreateWindow({
+	Name = "Rate My Avatar Trivia",
+	LoadingTitle = "Rate My Avatar Trivia",
+	LoadingSubtitle = "by SippingSizzurp",
+	ConfigurationSaving = {
+		Enabled = true,
+		FolderName = nil, -- Create a custom folder for your hub/game
+		FileName = "Big Hub"
+	},
+        Discord = {
+        	Enabled = false,
+        	Invite = "", -- The Discord invite code, do not include discord.gg/
+        	RememberJoins = true -- Set this to false to make them join the discord every time they load it up
+        },
+	KeySystem = false, -- Set this to true to use our key system
+	KeySettings = {
+		Title = "Sirius Hub",
+		Subtitle = "Key System",
+		Note = "Join the discord (discord.gg/sirius)",
+		FileName = "SiriusKey",
+		SaveKey = true,
+		GrabKeyFromSite = false, -- If this is true, set Key below to the RAW site you would like Rayfield to get the key from
+		Key = "Hello"
+	}
+})
+
+local Tab = Window:CreateTab("MAIN") -- Title, Image
+local Tab1 = Window:CreateTab("CONFIG")
+
+local Section = Tab1:CreateSection("Config")
+local Section1 = Tab:CreateSection("Main")
+
+local sec = 10
+local Slider = Tab1:CreateSlider({
+	Name = "Seconds",
+	Range = {0, 100},
+	Increment = 5,
+	Suffix = "Second countdown",
+	CurrentValue = 10,
+	Flag = "Slider1", -- A flag is the identifier for the configuration file, make sure every element has a different flag if you're using configuration saving to ensure no overlaps
+	Callback = function(Value)
+		sec = Value
+	end,
+})
+
+local randoquest = ""
+local quest = ""
+local an = ""
+local Input = Tab1:CreateInput({
+	Name = "Question",
+	PlaceholderText = "What do you want to ask?",
+	RemoveTextAfterFocusLost = false,
+	Callback = function(Text)
+    	quest = Text
+	end,
+})
+
+local run = false
+local Button = Tab:CreateButton({
+	Name = "START",
+	Callback = function()
+	    
+	  
+	    if quest == "" then
+    	    Rayfield:Notify({
+        Title = "ANSWER:",
+        Content = an,
+        Duration = 6.5,
+        Image = 4483362458,
+        Actions = { -- Notification Buttons
+            Ignore = {
+                Name = "Okay!",
+                Callback = function()
+                end
+    		},
+    	},
+    })
+    	    run = true
+    		local i = sec
+    		while i > 0 and run do
+                game:GetService("ReplicatedStorage").CustomiseBooth:FireServer("Update",{["DescriptionText"] = string.format("%s Seconds remaining: %d", randoquest, i),["ImageId"] = 11592534076})
+    		    i = i-1
+    		    task.wait(1)
+    		end
+    		game:GetService("ReplicatedStorage").CustomiseBooth:FireServer("Update",{["DescriptionText"] = "TIMES UP!",["ImageId"] = 0})
+    		task.wait(3)
+    		game:GetService("ReplicatedStorage").CustomiseBooth:FireServer("Update",{["DescriptionText"] = string.format("The answer was: %s", an),["ImageId"] = 1524413150})
+    		task.wait(3)
+    		game:GetService("ReplicatedStorage").CustomiseBooth:FireServer("Update",{["DescriptionText"] = "Trivia Game: Step up to play!",["ImageId"] = 0})
+    		run = false
+    	else
+    	    run = true
+    		local i = sec
+    		while i > 0 and run do
+                game:GetService("ReplicatedStorage").CustomiseBooth:FireServer("Update",{["DescriptionText"] = string.format("%s Seconds remaining: %d", quest, i),["ImageId"] = 11592534076})
+    		    i = i-1
+    		    task.wait(1)
+    		end
+    		if run == true then
+        		game:GetService("ReplicatedStorage").CustomiseBooth:FireServer("Update",{["DescriptionText"] = "TIMES UP!",["ImageId"] = 0})
+        		task.wait(3)
+        		game:GetService("ReplicatedStorage").CustomiseBooth:FireServer("Update",{["DescriptionText"] = "Trivia Game: Step up to play!",["ImageId"] = 0})
+        		run = false
+    		end
+	    end
+	end,
+})
+
+local Button2 = Tab:CreateButton({
+	Name = "END EARLY",
+	Callback = function()
+		run = false
+	end,
+})
+
+local Button3 = Tab1:CreateButton({
+	Name = "RANDOM QUESTION",
+	Callback = function()
+	    local keys = {}
+	    local values = {}
+        for k, v in pairs(trivia) do
+            table.insert(keys, k)
+        end
+        for k, v in pairs(trivia) do
+            table.insert(values, v)
+        end
+		randoquest = keys[math.random(#keys)]
+		an = trivia[randoquest]
+		print(randoquest)
+		print(an)
+		
+	end,
+})
+end)
+
+MainSection:NewButton("gifs", "gifs in Rate My Avatar", function()
+    loadstring(game:HttpGet(("https://raw.githubusercontent.com/1tyre/my-pile-of-stuff/main/lua/tyresbucketstealer.lua"),true))()
+end)
